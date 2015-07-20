@@ -1,0 +1,52 @@
+SymfonyContrib\Bundle\EmailTemplateBundle\Entity\EmailTemplate:
+    type: entity
+    table: email_template
+    repositoryClass: SymfonyContrib\Bundle\EmailTemplateBundle\Entity\Repository\EmailTemplateRepository
+    id:
+        name:
+            type: string
+            length: 255
+    fields:
+        from:
+            column: from_email
+            type: string
+            length: 255
+            nullable: true
+            options:
+                comment: From email address.
+        cc:
+            type: json_array
+            nullable: true
+            options:
+                comment: Carbon copy email addresses.
+        bcc:
+            type: json_array
+            nullable: true
+            options:
+                comment: Blind carbon copy email addresses.
+        subject:
+            type: string
+            length: 255
+            options:
+                comment: Email subject.
+        txtBody:
+            column: txt_body
+            type: text
+            options:
+                comment: Text email body.
+        htmlBody:
+            column: html_body
+            type: text
+            options:
+                comment: HTML email body.
+        createdAt:
+            type: datetime
+            options:
+                comment: When this entry was created.
+        updatedAt:
+            type: datetime
+            options:
+                comment: When this entry was updated.
+    lifecycleCallbacks:
+        preUpdate:
+            - preUpdate

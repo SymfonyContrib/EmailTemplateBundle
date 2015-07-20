@@ -1,0 +1,29 @@
+{
+    "name": "symfonycontrib/email-template-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 bundle that provides email templates in both twig files and twig in rendition from the doctrine.",
+    "keywords": ["Symfony", "bundle", "email", "template"],
+    "homepage": "http://symfonycontrib.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alan Doucette",
+            "email": "dragonwize@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/symfony": "~2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "SymfonyContrib\\Bundle\\EmailTemplateBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

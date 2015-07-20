@@ -1,0 +1,19 @@
+email_template_admin_list:
+    path:     /email-templates
+    defaults:
+        _controller: EmailTemplateBundle:Admin:list
+
+email_template_admin_add:
+    path:     /email-templates/add
+    defaults:
+        _controller: EmailTemplateBundle:Admin:form
+
+email_template_admin_edit:
+    path:     /email-templates/{name}/edit
+    defaults:
+        _controller: EmailTemplateBundle:Admin:form
+
+email_template_admin_delete:
+    path:     /email-templates/{name}/delete
+    defaults:
+        _controller: EmailTemplateBundle:Admin:delete

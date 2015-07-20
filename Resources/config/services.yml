@@ -1,0 +1,33 @@
+services:
+    email_template.repository:
+        class: Doctrine\ORM\EntityRepository
+        public: false
+        factory:
+            - "@doctrine.orm.default_entity_manager"
+            - getRepository
+        arguments:
+            - SymfonyContrib\Bundle\EmailTemplateBundle\Entity\EmailTemplate
+
+    email_template.twig.loader.doctrine:
+        class: SymfonyContrib\Bundle\EmailTemplateBundle\Twig\Loader\EmailDoctrineLoader
+        arguments:
+            - "@email_template.repository"
+        tags:
+            - name: twig.loader
+
+    email_template.renderer.twig:
+        class: SymfonyContrib\Bundle\EmailTemplateBundle\Renderer\TwigRenderer
+        arguments:
+            - "@twig"
+
+    email_builder:
+        class: SymfonyContrib\Bundle\EmailTemplateBundle\Builder\MessageBuilder
+        arguments:
+            - "@email_template.renderer.twig"
+            - "%email_template.defaults%"
+
+    email_template.form:
+        class: SymfonyContrib\Bundle\EmailTemplateBundle\Form\EmailTemplateForm
+        tags:
+            - name: form.type
+              alias: email_template_form

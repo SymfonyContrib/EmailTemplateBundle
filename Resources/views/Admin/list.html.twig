@@ -1,0 +1,57 @@
+{% extends 'EmailTemplateBundle::layout.html.twig' %}
+
+{% block page_title %}Email Templates{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-8">
+            {#<a href="{{ path('email_template_admin_add') }}" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+        <strong>Add Template</strong>
+    </a>#}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Updated At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tpl in db_templates %}
+                        <tr>
+                            <td>{{ tpl.name }}</td>
+                            <td>{{ tpl.subject }}</td>
+                            <td>{{ tpl.updatedAt|date('Y-m-d H:i') }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a title="Edit" href="{{ path('email_template_admin_edit', {"name": tpl.name}) }}" class="btn btn-primary btn-sm">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                    <a title="Delete" href="{{ path('email_template_admin_delete', {"name": tpl.name}) }}" class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Override a Default Template</h3>
+                </div>
+                <div class="list-group">
+                    {% for name, template in overridable if not db_templates[name]|default(null) %}
+                        <a href="{{ path('email_template_admin_edit', {"name": name}) }}" class="list-group-item">
+                            {{ name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
